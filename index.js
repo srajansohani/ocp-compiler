@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import amqp from "amqplib/callback_api.js";
-const express = require("express");
+import express from "express";
 const app = express();
 import {
   compile_cpp,
@@ -143,7 +143,7 @@ const startup = async () => {
 
 app.get("/", (_, res) => res.send("OK"));
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
   console.log("Listening on", PORT);
 });
