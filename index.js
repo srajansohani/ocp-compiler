@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import amqp from "amqplib/callback_api.js";
 import express from "express";
+import fs from "fs";
 const app = express();
 import {
   compile_cpp,
@@ -134,6 +135,10 @@ const connect_to_rabbitMQ = async () => {
 
 const startup = async () => {
   try {
+    const isFilesExist = await fs.existsSync("./files");
+    if (!isFilesExist) {
+      await fs.mkdirSync("./files");
+    }
     await connect_to_mongoDB();
     await connect_to_rabbitMQ();
   } catch (err) {
